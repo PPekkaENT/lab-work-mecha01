@@ -1,0 +1,6 @@
+# vscode settings folder
+.vscode/
+
+# random files
+# display the output of the folder structure
+tree.txt
