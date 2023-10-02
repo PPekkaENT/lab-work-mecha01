@@ -25,6 +25,7 @@ void calculateAngle() {
   time1 = millis();
   angle = (double) (angularVelocity+lastVelocity)/2*(time1-time0);
   time0 = time1;
+  lastVelocity = angularVelocity;
   Serial.print(angle);
   Serial.println(" deg");
   Serial.println(" ");

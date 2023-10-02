@@ -1,0 +1,10 @@
+
+root = true
+
+[{Land_Vehicle, Climbing_Robot}/**.ino]
+charset = utf-8
+
+# 2 space indentation
+[{Land_Vehicle, Climbing_Robot}/**.ino]
+indent_style = space
+indent_size = 2

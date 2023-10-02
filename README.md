@@ -1,5 +1,6 @@
 # Laboratory Work in Mechatronics
-A project folder for the source code of two Arduino projects.
+Project folder for the source code of two Arduino projects.
+Arduino uno + Crowtail modules
 -----
 ### Project folder structure
 ```
@@ -7,6 +8,7 @@ A project folder for the source code of two Arduino projects.
 ├── Climbing_Robot
 │   └── Climbing_Robot.ino
 ├── .git
+├── .gitattributes
 ├── .gitignore
 ├── Land_Vehicle
 │   ├── BLDC_motor.ino
@@ -17,8 +19,8 @@ A project folder for the source code of two Arduino projects.
 │   └── Ultrasonic
 ├── README.md
 ├── test
-    ├── ESC-Calibration
-    └── Gyro_Module
+    ├── ESC-Calibration
+    └── Gyro_Module
 
 ```
 - Climbing_Robot/: sketch + tabs
@@ -27,7 +29,17 @@ A project folder for the source code of two Arduino projects.
 - test/: folder for arduino module testing 
 -----
 ### How to run
+- Clone repository:
+```
+git clone <repo_address>
+```
+- Select editor and verify
+- Check settings: COM port, board type
+- Compile and upload to Arduino uno
+-----
 #### Project 1 - Land vehicle
+- Land_Vehicle.ino - Main sketch
+- Gyro_module.ino - Gyro module tab
 -----
 #### Project 2 - Climbing robot
 -----
