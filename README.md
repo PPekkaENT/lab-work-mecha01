@@ -7,26 +7,30 @@ Arduino uno + Crowtail modules
 .
 ├── Climbing_Robot
 │   └── Climbing_Robot.ino
+├── .editorconfig
 ├── .git
 ├── .gitattributes
 ├── .gitignore
 ├── Land_Vehicle
-│   ├── BLDC_motor.ino
+│   ├── BLDC_module.ino
 │   ├── Gyro_module.ino
-│   └── Land_Vehicle.ino
+│   ├── IR_Reflective_module.ino
+│   ├── Land_Vehicle.ino
+│   ├── Servo_module.ino
+│   └── Ultrasonic_module.ino
 ├── libraries
 │   ├── Servo
 │   └── Ultrasonic
 ├── README.md
 ├── test
     ├── ESC-Calibration
-    └── Gyro_Module
+    └── Gyro_Module
 
 ```
 - Climbing_Robot/: sketch + tabs
 - Land Vecicle/: sketch + tabs
-- libraries/: folder for used libraries
-- test/: folder for arduino module testing 
+- libraries/: used libraries
+- test/: arduino module testing 
 -----
 ### How to run
 - Clone repository:
@@ -36,6 +40,11 @@ git clone <repo_address>
 - Select editor and verify
 - Check settings: COM port, board type
 - Compile and upload to Arduino uno
+-----
+### Workflow (contributors)
+- General settings are set in ```.gitattributes``` & ```.editorconfig``` files to maintain integrity.
+- Make development branch "dev-<name>", e.g.
+- Don't merge a branch, before it is accepted as a module by the development team. 
 -----
 #### Project 1 - Land vehicle
 - Land_Vehicle.ino - Main sketch

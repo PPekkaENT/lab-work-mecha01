@@ -2,12 +2,6 @@
 #include <Servo.h>
 #include <Math.h>
 
-// define protypes
-// gyro functions
-void calibrateGyro();
-void calculateAngle();
-// BLDC motor functions
-
 // analog pins
 // gyro
 int gyroPin = A4;
@@ -22,6 +16,12 @@ double angle = 0;
 double lastVelocity = 0;
 unsigned long time0 = 0;
 unsigned long time1 = 0;
+
+// define protypes
+// gyro functions
+void calibrateGyro();
+void calculateAngle();
+// BLDC motor functions
 
 void setup() {
   // Open serial communications and wait for port to open:
