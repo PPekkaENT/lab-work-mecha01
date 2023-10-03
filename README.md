@@ -1,6 +1,7 @@
 # Laboratory Work in Mechatronics
-Project folder for the source code of two Arduino projects.
-Arduino uno + Crowtail modules
+-----
+- Project folder for the source code of two Arduino projects.<br>
+- Arduino uno + Crowtail deluxe kit
 -----
 ### Project folder structure
 ```
@@ -35,7 +36,7 @@ Arduino uno + Crowtail modules
 ### How to run
 - Clone repository:
 ```
-git clone <repo_address>
+git clone git@github.com:PPekkaENT/lab-work-mecha01.git
 ```
 - Select editor and verify
 - Check settings: COM port, board type
@@ -43,7 +44,7 @@ git clone <repo_address>
 -----
 ### Workflow (contributors)
 - General settings are set in ```.gitattributes``` & ```.editorconfig``` files to maintain integrity.
-- Make development branch "dev-<name>", e.g.
+- Make development branch ```<dev-name>```.
 - Don't merge a branch, before it is accepted as a module by the development team. 
 -----
 #### Project 1 - Land vehicle
