@@ -1,3 +1,5 @@
+#include <Arduino.h>
+
 // Include library files
 #include <Servo.h>
 #include <Math.h>
@@ -67,6 +69,11 @@ bool checkIRstates();
 // get ultrasonic sensors distance 
 void getDistance();
 
+
+void setup();
+
+void loop();
+
 void setup() {
   initServos();
   initBldc();
@@ -92,4 +99,92 @@ void loop() {
   vehicle.power = (checkIRstates()) ? 20 : 0;
   if(ultraDistance < 30 ) { vehicle.power = 0;}
   if(power != vehicle.power) { bldcPower(); }
+}
+
+void initBldc() {
+  ESC.attach(9,1000,2000);
+  // set motor power to 0%
+  return;
+}
+void bldcPower() {
+  int i = 0;
+  i = map(vehicle.power, 0, 100, 1000, 2000);
+  //  i = map(vehicle.power, 0, 100, 90, 180);
+  // error detection
+  if(i < 1000 || i > 2000) {i = 1000;}
+  ESC.writeMicroseconds(i);
+  return;
+}
+
+bool checkIRstates() {
+  ir1State = digitalRead(irPin1);
+  ir2State = digitalRead(irPin2);
+  ir3State = digitalRead(irPin3);
+  
+  if((ir1State != 0)&(ir2State == 0)&(ir3State == 0)){
+    //if(ir1State != 1){
+    Test_Load_Left();
+    return true;
+  }
+  if((ir1State == 0)&(ir2State != 0)&(ir3State == 0)) {
+    //if(ir2State != 1){
+    go_straight();
+    return true;
+  } 
+  if((ir1State == 0)&(ir2State == 0)&(ir3State != 0)) {
+    //if(ir3State != 1){
+    Test_Load_Right();
+    return true;
+  }
+  if((ir1State != 1)&(ir2State != 1)&(ir3State != 1)) {
+    clean_Output();
+    return false;
+  }
+  if((ir1State != 0)&(ir2State != 0)&(ir3State != 0)) {
+    clean_Output();
+    return false;
+  }
+}
+
+void initServos() {
+  // attaches the servo on pin 6 to the servo object 
+  servoBrake.attach(6);  
+  // 55 degrees = neutral position
+  servoBrake.write(vehicle.brakeNeutral);
+  // attaches the servo on pin 10 to the servo object 
+  servoTurn.attach(10); 
+  // 70 degrees = neutral position  
+  servoTurn.write(vehicle.neutral);
+  return;
+}
+
+// turn left 
+void Test_Load_Left() {
+  servoTurn.write(vehicle.leftTurn);
+  return; 
+
+}
+// turn right
+void Test_Load_Right() {
+  servoTurn.write(vehicle.rightTurn);
+  return; 
+}
+
+// Stop the motors
+void clean_Output() {
+  servoTurn.write(vehicle.neutral);
+  return;
+}
+
+// go straight
+void go_straight() {
+  servoTurn.write(vehicle.neutral);
+  return;
+}
+
+void getDistance()
+{
+  //get the current distance;
+  ultraDistance=ultrasonic.Ranging(CM);
+  return;
 }

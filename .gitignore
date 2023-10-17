@@ -4,6 +4,7 @@
 # random files
 # display the output of the folder structure
 tree.txt
+archive/
 
 # Arduino output path
 build/
