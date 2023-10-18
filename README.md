@@ -14,24 +14,22 @@
 │   └── Climbing_Robot.ino
 ├── Land_Vehicle
 │   ├── BLDC_module.ino
-│   ├── IR_reflective_module.ino
-│   ├── Land_Vehicle.ino --> main program
+│   ├── IR_Reflective_module.ino
+│   ├── Land_Vehicle.ino --> main program (linefollower with a goal)
 │   ├── servo_modules.ino
 │   └── ultrasonic_module.ino
 ├── README.md
 ├── build-example
-│   └── Land_Vehicle.ino.cpp --> compiler output from Land_Vehicle.ino
+│   └── Land_Vehicle.ino.cpp --> how the compiler builds the program
 ├── libraries
 │   ├── Servo
 │   └── Ultrasonic
-├── test
-    ├── IRCalibration_test --> calibrate IR sensors
-    ├── brakeCalibration_test --> calibrate brakes
-    ├── brake_test --> test brakes
-    ├── lineFollower_test --> test linefollower
-    ├── power_test --> test power
-    ├── s-pattern_test --> test movement
-    └── ultrasonic_test --> test ultrasonic sensor
+├── test --> module testing
+    ├── IRCalibration_test
+    ├── brakeCalibration_test
+    ├── brake_test
+    ├── power_test
+    └── ultrasonic_test
 
 ```
 - Climbing_Robot/: sketch + tabs
