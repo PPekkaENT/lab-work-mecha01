@@ -41,7 +41,7 @@ struct Robot{
   int rightTurn;
   int leftTurn;
 };
-Robot vehicle = {20, 55, 73, 70, 40, 100};
+Robot vehicle = {16, 55, 80, 70, 60, 80};
 
 // Define protypes
 
@@ -76,20 +76,21 @@ void setup() {
 
 void loop() {
   int power = vehicle.power;
-
   getDistance();
-  if(ultraDistance < 40 && vehicle.power != 0) 
+  // Braking
+  // brake is set to neutral as default
+  (ultraDistance < 32 && vehicle.power == 0) ? servoBrake.write(vehicle.brakePower) :
+    servoBrake.write(vehicle.brakeNeutral);
+  /*if(ultraDistance < 32 && vehicle.power == 0) 
   {
     servoBrake.write(vehicle.brakePower);
-  }
-  if(ultraDistance < 30 && vehicle.power == 0) 
+  } 
+  else 
   {
-    // set brake to neutral
     servoBrake.write(vehicle.brakeNeutral);
-  }
-
+  }*/
   // power and direction
-  vehicle.power = (checkIRstates()) ? 20 : 0;
-  if(ultraDistance < 30 ) {vehicle.power = 0;}
+  vehicle.power = (checkIRstates()) ? 16 : 0;
+  if(ultraDistance < 32 ) {vehicle.power = 0;}
   if(power != vehicle.power) {bldcPower();}
 }

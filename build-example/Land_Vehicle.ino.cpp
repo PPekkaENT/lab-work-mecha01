@@ -43,7 +43,7 @@ struct Robot{
   int rightTurn;
   int leftTurn;
 };
-Robot vehicle = {20, 55, 73, 70, 40, 100};
+Robot vehicle = {16, 55, 80, 70, 60, 80};
 
 // Define protypes
 
@@ -69,7 +69,6 @@ bool checkIRstates();
 // get ultrasonic sensors distance 
 void getDistance();
 
-
 void setup();
 
 void loop();
@@ -83,22 +82,23 @@ void setup() {
 
 void loop() {
   int power = vehicle.power;
-
   getDistance();
-  if(ultraDistance < 40 && vehicle.power != 0) 
+  // Braking
+  // brake is set to neutral as default
+  (ultraDistance < 32 && vehicle.power == 0) ? servoBrake.write(vehicle.brakePower) :
+    servoBrake.write(vehicle.brakeNeutral);
+  /*if(ultraDistance < 32 && vehicle.power == 0) 
   {
     servoBrake.write(vehicle.brakePower);
-  }
-  if(ultraDistance < 30 && vehicle.power == 0) 
+  } 
+  else 
   {
-    // set brake to neutral
     servoBrake.write(vehicle.brakeNeutral);
-  }
-
+  }*/
   // power and direction
-  vehicle.power = (checkIRstates()) ? 20 : 0;
-  if(ultraDistance < 30 ) { vehicle.power = 0;}
-  if(power != vehicle.power) { bldcPower(); }
+  vehicle.power = (checkIRstates()) ? 16 : 0;
+  if(ultraDistance < 32 ) {vehicle.power = 0;}
+  if(power != vehicle.power) {bldcPower();}
 }
 
 void initBldc() {
@@ -120,25 +120,24 @@ bool checkIRstates() {
   ir1State = digitalRead(irPin1);
   ir2State = digitalRead(irPin2);
   ir3State = digitalRead(irPin3);
-  
-  if((ir1State != 0)&(ir2State == 0)&(ir3State == 0)){
-    //if(ir1State != 1){
+  int sum = 0;
+  sum = ir1State + ir2State + ir3State;
+
+  if((ir1State == 1)&(ir2State == 0)&(ir3State == 0)){
     Test_Load_Left();
     return true;
   }
-  if((ir1State == 0)&(ir2State != 0)&(ir3State == 0)) {
-    //if(ir2State != 1){
+  if(ir2State == 1 && sum < 3) {
     go_straight();
     return true;
   } 
-  if((ir1State == 0)&(ir2State == 0)&(ir3State != 0)) {
-    //if(ir3State != 1){
+  if((ir1State == 0)&(ir2State == 0)&(ir3State == 1)) {
     Test_Load_Right();
     return true;
   }
   if((ir1State != 1)&(ir2State != 1)&(ir3State != 1)) {
     clean_Output();
-    return false;
+    return true;
   }
   if((ir1State != 0)&(ir2State != 0)&(ir3State != 0)) {
     clean_Output();
@@ -185,6 +184,21 @@ void go_straight() {
 void getDistance()
 {
   //get the current distance;
-  ultraDistance=ultrasonic.Ranging(CM);
+
+  int values[4] = {0,0,0,0};
+
+  for (int i = 0; i < 4; ++i) 
+  {
+    values[i] = ultrasonic.Ranging(CM);
+  }
+  int maxVal = values[0];
+  for (int i = 0; i < (sizeof(values) / sizeof(values[0])); ++i)
+  {
+    if (values[i] > maxVal) 
+    {
+      maxVal = values[i];
+    }
+  }
+  ultraDistance = maxVal; 
   return;
 }
