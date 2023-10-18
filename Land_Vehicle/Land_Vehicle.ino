@@ -90,6 +90,6 @@ void loop() {
 
   // power and direction
   vehicle.power = (checkIRstates()) ? 20 : 0;
-  if(ultraDistance < 30 ) { vehicle.power = 0;}
-  if(power != vehicle.power) { bldcPower(); }
+  if(ultraDistance < 30 ) {vehicle.power = 0;}
+  if(power != vehicle.power) {bldcPower();}
 }

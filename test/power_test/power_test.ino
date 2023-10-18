@@ -41,7 +41,7 @@ void loop() {
   //get the current distance;
   Distance=ultrasonic.Ranging(CM);
   // stop test after 15 s or object is closer than 10 cm
-  if(millis() > 17000) { return; }
+  if(millis() > 17000) {return;}
   if(millis() > 15000 || Distance < 10)
   {
     ESC.writeMicroseconds(1000);

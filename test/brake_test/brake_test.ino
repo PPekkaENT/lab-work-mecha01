@@ -30,7 +30,7 @@ void setup() {
 void loop() {
   int i = 0;
 
-  if(testNumber > 0) {return ;}
+  if(testNumber > 0) {return;}
   i = map(vehicle.power, 0, 100, 1000, 2000);
   ESC.writeMicroseconds(i);
   // power on for 4 sec.
