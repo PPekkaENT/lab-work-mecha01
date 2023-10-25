@@ -81,14 +81,6 @@ void loop() {
   // brake is set to neutral as default
   (ultraDistance < 32 && vehicle.power == 0) ? servoBrake.write(vehicle.brakePower) :
     servoBrake.write(vehicle.brakeNeutral);
-  /*if(ultraDistance < 32 && vehicle.power == 0) 
-  {
-    servoBrake.write(vehicle.brakePower);
-  } 
-  else 
-  {
-    servoBrake.write(vehicle.brakeNeutral);
-  }*/
   // power and direction
   vehicle.power = (checkIRstates()) ? 16 : 0;
   if(ultraDistance < 32 ) {vehicle.power = 0;}

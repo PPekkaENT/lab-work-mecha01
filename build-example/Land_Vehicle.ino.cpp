@@ -87,14 +87,6 @@ void loop() {
   // brake is set to neutral as default
   (ultraDistance < 32 && vehicle.power == 0) ? servoBrake.write(vehicle.brakePower) :
     servoBrake.write(vehicle.brakeNeutral);
-  /*if(ultraDistance < 32 && vehicle.power == 0) 
-  {
-    servoBrake.write(vehicle.brakePower);
-  } 
-  else 
-  {
-    servoBrake.write(vehicle.brakeNeutral);
-  }*/
   // power and direction
   vehicle.power = (checkIRstates()) ? 16 : 0;
   if(ultraDistance < 32 ) {vehicle.power = 0;}
@@ -106,6 +98,7 @@ void initBldc() {
   // set motor power to 0%
   return;
 }
+
 void bldcPower() {
   int i = 0;
   i = map(vehicle.power, 0, 100, 1000, 2000);
@@ -117,10 +110,10 @@ void bldcPower() {
 }
 
 bool checkIRstates() {
+  int sum = 0;
   ir1State = digitalRead(irPin1);
   ir2State = digitalRead(irPin2);
   ir3State = digitalRead(irPin3);
-  int sum = 0;
   sum = ir1State + ir2State + ir3State;
 
   if((ir1State == 1)&(ir2State == 0)&(ir3State == 0)){
