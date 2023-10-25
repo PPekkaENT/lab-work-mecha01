@@ -72,15 +72,30 @@ void setup() {
   initBldc();
   delay(100);
   bldcPower();
+  Serial.begin(9600);
 }
 
 void loop() {
   int power = vehicle.power;
+  //Serial.print("Current power: ");
+  //Serial.println(power);
   getDistance();
+  Serial.println(ultraDistance);
+
   // Braking
-  // brake is set to neutral as default
-  (ultraDistance < 32 && vehicle.power == 0) ? servoBrake.write(vehicle.brakePower) :
+  if(ultraDistance < 32 && vehicle.power == 0) 
+  {
+    servoBrake.write(vehicle.brakePower);
+  } else {
     servoBrake.write(vehicle.brakeNeutral);
+  }
+  /*
+  if(ultraDistance < 30 && vehicle.power == 0) 
+  {
+    // set brake to neutral
+    servoBrake.write(vehicle.brakeNeutral);
+  }
+  */
   // power and direction
   vehicle.power = (checkIRstates()) ? 16 : 0;
   if(ultraDistance < 32 ) {vehicle.power = 0;}
