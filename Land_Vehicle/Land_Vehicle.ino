@@ -77,8 +77,6 @@ void setup() {
 
 void loop() {
   int power = vehicle.power;
-  //Serial.print("Current power: ");
-  //Serial.println(power);
   getDistance();
   Serial.println(ultraDistance);
 
@@ -89,13 +87,6 @@ void loop() {
   } else {
     servoBrake.write(vehicle.brakeNeutral);
   }
-  /*
-  if(ultraDistance < 30 && vehicle.power == 0) 
-  {
-    // set brake to neutral
-    servoBrake.write(vehicle.brakeNeutral);
-  }
-  */
   // power and direction
   vehicle.power = (checkIRstates()) ? 16 : 0;
   if(ultraDistance < 32 ) {vehicle.power = 0;}
