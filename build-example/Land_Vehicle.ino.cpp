@@ -78,15 +78,21 @@ void setup() {
   initBldc();
   delay(100);
   bldcPower();
+  Serial.begin(9600);
 }
 
 void loop() {
   int power = vehicle.power;
   getDistance();
+  Serial.println(ultraDistance);
+
   // Braking
-  // brake is set to neutral as default
-  (ultraDistance < 32 && vehicle.power == 0) ? servoBrake.write(vehicle.brakePower) :
+  if(ultraDistance < 32 && vehicle.power == 0) 
+  {
+    servoBrake.write(vehicle.brakePower);
+  } else {
     servoBrake.write(vehicle.brakeNeutral);
+  }
   // power and direction
   vehicle.power = (checkIRstates()) ? 16 : 0;
   if(ultraDistance < 32 ) {vehicle.power = 0;}
@@ -95,30 +101,35 @@ void loop() {
 
 void initBldc() {
   ESC.attach(9,1000,2000);
-  // set motor power to 0%
   return;
 }
 void bldcPower() {
   int i = 0;
   i = map(vehicle.power, 0, 100, 1000, 2000);
-  // error handling
+  // error detection
   if(i < 1000 || i > 2000) {i = 1000;}
   ESC.writeMicroseconds(i);
   return;
 }
 
 bool checkIRstates() {
-  int sum = 0;
   ir1State = digitalRead(irPin1);
   ir2State = digitalRead(irPin2);
   ir3State = digitalRead(irPin3);
-  sum = ir1State + ir2State + ir3State;
 
   if((ir1State == 1)&(ir2State == 0)&(ir3State == 0)){
     Test_Load_Left();
     return true;
   }
-  if(ir2State == 1 && sum < 3) {
+  if((ir1State == 0)&(ir2State == 1)&(ir3State == 0)) {
+    go_straight();
+    return true;
+  } 
+   if((ir1State == 1)&(ir2State == 1)&(ir3State == 0)) {
+    go_straight();
+    return true;
+  } 
+   if((ir1State == 0)&(ir2State == 1)&(ir3State == 1)) {
     go_straight();
     return true;
   } 
@@ -142,17 +153,14 @@ void getDistance()
 
   int values[4] = {0,0,0,0};
 
-  for (int i = 0; i < 4; ++i) 
-  {
+  for (int i = 0; i < 4; i++) {
     values[i] = ultrasonic.Ranging(CM);
   }
   int maxVal = values[0];
-  for (int i = 0; i < (sizeof(values) / sizeof(values[0])); ++i)
-  {
-    if (values[i] > maxVal) 
-    {
-      maxVal = values[i];
-    }
+  for (int i = 0; i < (sizeof(values) / sizeof(values[0])); i++) {
+      if (values[i] > maxVal) {
+         maxVal = values[i];
+      }
   }
   ultraDistance = maxVal; 
   return;
