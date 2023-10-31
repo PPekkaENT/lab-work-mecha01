@@ -98,12 +98,10 @@ void initBldc() {
   // set motor power to 0%
   return;
 }
-
 void bldcPower() {
   int i = 0;
   i = map(vehicle.power, 0, 100, 1000, 2000);
-  //  i = map(vehicle.power, 0, 100, 90, 180);
-  // error detection
+  // error handling
   if(i < 1000 || i > 2000) {i = 1000;}
   ESC.writeMicroseconds(i);
   return;
@@ -136,6 +134,28 @@ bool checkIRstates() {
     clean_Output();
     return false;
   }
+}
+
+void getDistance()
+{
+  //get the current distance;
+
+  int values[4] = {0,0,0,0};
+
+  for (int i = 0; i < 4; ++i) 
+  {
+    values[i] = ultrasonic.Ranging(CM);
+  }
+  int maxVal = values[0];
+  for (int i = 0; i < (sizeof(values) / sizeof(values[0])); ++i)
+  {
+    if (values[i] > maxVal) 
+    {
+      maxVal = values[i];
+    }
+  }
+  ultraDistance = maxVal; 
+  return;
 }
 
 void initServos() {
@@ -171,27 +191,5 @@ void clean_Output() {
 // go straight
 void go_straight() {
   servoTurn.write(vehicle.neutral);
-  return;
-}
-
-void getDistance()
-{
-  //get the current distance;
-
-  int values[4] = {0,0,0,0};
-
-  for (int i = 0; i < 4; ++i) 
-  {
-    values[i] = ultrasonic.Ranging(CM);
-  }
-  int maxVal = values[0];
-  for (int i = 0; i < (sizeof(values) / sizeof(values[0])); ++i)
-  {
-    if (values[i] > maxVal) 
-    {
-      maxVal = values[i];
-    }
-  }
-  ultraDistance = maxVal; 
   return;
 }
