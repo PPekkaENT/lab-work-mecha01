@@ -1,7 +1,7 @@
 # Laboratory Work in Mechatronics
 -----
 - Project folder for the source code of two Arduino projects.<br>
-- Arduino uno + Crowtail deluxe kit
+- Hardware: Arduino uno + Crowtail deluxe kit
 -----
 ### Project folder structure
 ```
@@ -20,22 +20,17 @@
 │   └── ultrasonic_module.ino
 ├── README.md
 ├── build-example
-│   └── Land_Vehicle.ino.cpp --> how the compiler builds the program
+│   └── Land_Vehicle.ino.cpp --> how the compiler merges the tabs
 ├── libraries
 │   ├── Servo
 │   └── Ultrasonic
 ├── test --> module testing
-    ├── IRCalibration_test
-    ├── brakeCalibration_test
-    ├── brake_test
-    ├── power_test
-    └── ultrasonic_test
 
 ```
-- Climbing_Robot/: sketch + tabs
-- Land Vecicle/: sketch + tabs
+- (Project 1) Land_Vehicle/: main sketch + tabs
+- (Project 2) Climbing_Robot/: main sketch + tabs
 - libraries/: used libraries
-- test/: arduino module testing 
+- test/: sketches for module testing 
 -----
 ### How to run
 - Clone repository:
@@ -46,16 +41,13 @@ OR
 ```
 git clone https://github.com/PPekkaENT/lab-work-mecha01.git
 ```
-- Select editor and verify
+- Select editor
 - Check settings: COM port, board type
-- Compile and upload to Arduino uno
------
-### Workflow (contributors)
-- Make development branch ```<dev-name>```.
-- Don't merge a branch, before it is accepted as a module by the development team. 
+- Verify, compile and upload to Arduino uno
 -----
 #### Project 1 - Land vehicle
-- Land_Vehicle.ino - Main sketch
+- Add description here
 -----
 #### Project 2 - Climbing robot
+- Add description here
 -----
