@@ -1,6 +1,5 @@
 void initBldc() {
   ESC.attach(9,1000,2000);
-  // set motor power to 0%
   return;
 }
 void bldcPower() {
