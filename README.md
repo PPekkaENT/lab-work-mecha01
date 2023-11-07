@@ -29,10 +29,9 @@
 │   └── servo_modules.ino
 ├── README.md
 ├── test --> module testing
-
 ```
 - (Project 1) Land_Vehicle/: main sketch + tabs
-- (Project 2) Climbing_Robot/: main sketch + tabs
+- (Project 2) Pipe_Robot/: main sketch + tabs
 - libraries/: used libraries
 - test/: sketches for module testing 
 -----
@@ -52,6 +51,6 @@ git clone https://github.com/PPekkaENT/lab-work-mecha01.git
 #### Project 1 - Land vehicle
 - Add description here
 -----
-#### Project 2 - Climbing robot
+#### Project 2 - Pipe_Robot
 - Add description here
 -----
