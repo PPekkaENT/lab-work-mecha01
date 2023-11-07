@@ -6,24 +6,28 @@
 ### Project folder structure
 ```
 .
+├── build-example
+│   └── Land_Vehicle.ino.cpp --> how the compiler merges the tabs
 ├── .editorconfig
 ├── .git
 ├── .gitattributes
 ├── .gitignore
-├── Climbing_Robot
-│   └── Climbing_Robot.ino
 ├── Land_Vehicle
 │   ├── BLDC_module.ino
 │   ├── IR_Reflective_module.ino
 │   ├── Land_Vehicle.ino --> main program (linefollower with a goal)
 │   ├── servo_modules.ino
-│   └── ultrasonic_module.ino
-├── README.md
-├── build-example
-│   └── Land_Vehicle.ino.cpp --> how the compiler merges the tabs
+│   └── Ultrasonic_module.ino
 ├── libraries
 │   ├── Servo
 │   └── Ultrasonic
+├── Pipe_Robot
+│   ├── BLDC_module.ino
+│   ├── hall_sensor_module.ino
+│   ├── IR_reflective_module.ino
+│   ├── Pipe_Robot.ino --> main program
+│   └── servo_modules.ino
+├── README.md
 ├── test --> module testing
 
 ```
