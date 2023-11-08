@@ -79,10 +79,18 @@ void loop() {
   getDistance();
   // Braking
   // brake is set to neutral as default
-  (ultraDistance < 32 && vehicle.power == 0) ? servoBrake.write(vehicle.brakePower) :
+  (ultraDistance < 35 && vehicle.power == 0) ? servoBrake.write(vehicle.brakePower) :
     servoBrake.write(vehicle.brakeNeutral);
   // power and direction
-  vehicle.power = (checkIRstates()) ? 16 : 0;
-  if(ultraDistance < 32 ) {vehicle.power = 0;}
+
+  if (ultraDistance > 100)
+  {
+    vehicle.power = (checkIRstates()) ? 16 : 0;
+  }
+  else
+  {
+    vehicle.power = (checkIRstates()) ? 13 : 0;
+  }
+  if(ultraDistance < 35 ) {vehicle.power = 0;}
   if(power != vehicle.power) {bldcPower();}
 }
