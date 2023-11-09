@@ -22,13 +22,10 @@
 │   ├── Servo
 │   └── Ultrasonic
 ├── Pipe_Robot
-│   ├── BLDC_module.ino
-│   ├── hall_sensor_module.ino
-│   ├── IR_reflective_module.ino
-│   ├── Pipe_Robot.ino --> main program
-│   └── servo_modules.ino
+│   └── Pipe_Robot.ino --> main program
 ├── README.md
 ├── test --> module testing
+
 ```
 - (Project 1) Land_Vehicle/: main sketch + tabs
 - (Project 2) Pipe_Robot/: main sketch + tabs

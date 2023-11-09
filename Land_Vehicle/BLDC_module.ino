@@ -1,5 +1,5 @@
 void initBldc() {
-  ESC.attach(9,1000,2000);
+  ESC.attach(8,1000,2000);
   return;
 }
 void bldcPower() {

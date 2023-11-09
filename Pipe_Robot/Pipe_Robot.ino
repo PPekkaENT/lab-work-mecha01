@@ -13,7 +13,7 @@ const int irPin1 = 4;
 const int irPin2 = 5;
 // servo06 = D06
 // servo010 = D10
-// BLDC = D09
+// BLDC = D08
 
 // Variables
 // Servo motors
@@ -31,23 +31,39 @@ struct Robot{
 };
 Robot robot = {16};
 
-// Define protypes
-
-// #servo_modules.ino
-// Initialize the servos
-void initServos();
-
-// #BLDC_module.ino
-// Initialize BLDC
-void initBldc();
-void bldcPower();
+// Define protypes here if any tabs
 
 void setup() {
-  initServos();
-  initBldc();
-  delay(100);
+  // initialize BLDC
+  ESC.attach(9,1000,2000);
+  // attaches the servo on pin 6 to the servo object (braking) 
+  servo06.attach(6);
+  //servo06.write();
+  // attaches the servo on pin 10 to the servo object 
+  servo010.attach(10); 
+  //servoTurn.write();  
   bldcPower();
+  // delay for ESC to start
+  delay(1000);
 }
 
 void loop() {
+}
+
+void bldcPower() {
+  int i = 0;
+  i = map(robot.power, 0, 100, 1000, 2000);
+  // error handling
+  if(i < 1000 || i > 2000) {i = 1000;}
+  ESC.writeMicroseconds(i);
+  return;
+}
+
+bool checkIRstates() {
+  // line detected
+  bool lined = false;
+  ir1State = digitalRead(irPin1);
+  ir2State = digitalRead(irPin2);
+  lined = (ir1State || ir2State) ? false : true;
+  return lined;
 }

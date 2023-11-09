@@ -5,7 +5,7 @@
 
 // Analog pins
 
-// Digital pins: [2-6,7,9,10]
+// Digital pins: [2-8,10]
 // Left IR reflective
 const int irPin1 = 4;
 // Center IR reflective
@@ -15,7 +15,7 @@ const int irPin3 = 7;
 // servoBrake = D06
 // servoTurn = D10
 // ultrasonic = D02&D03
-// BLDC = D09
+// BLDC = D08
 
 // Variables
 // Servo motors
@@ -70,8 +70,8 @@ void getDistance();
 void setup() {
   initServos();
   initBldc();
-  delay(100);
   bldcPower();
+  delay(1000);
 }
 
 void loop() {
@@ -79,9 +79,8 @@ void loop() {
   getDistance();
   // Braking
   // brake is set to neutral as default
-  (ultraDistance < 35 && vehicle.power == 0) ? servoBrake.write(vehicle.brakePower) :
+  (ultraDistance < 35 && vehicle.power == 0) ? servoBrake.write(vehicle.brakePower) : 
     servoBrake.write(vehicle.brakeNeutral);
-  // power and direction
 
   if (ultraDistance > 100)
   {
