@@ -1,5 +1,4 @@
 #include <Arduino.h>
-
 // Include library files
 #include <Servo.h>
 #include <Math.h>
@@ -7,7 +6,7 @@
 
 // Analog pins
 
-// Digital pins: [2-6,7,9,10]
+// Digital pins: [2-8,10]
 // Left IR reflective
 const int irPin1 = 4;
 // Center IR reflective
@@ -17,7 +16,7 @@ const int irPin3 = 7;
 // servoBrake = D06
 // servoTurn = D10
 // ultrasonic = D02&D03
-// BLDC = D09
+// BLDC = D08
 
 // Variables
 // Servo motors
@@ -70,14 +69,13 @@ bool checkIRstates();
 void getDistance();
 
 void setup();
-
 void loop();
 
 void setup() {
   initServos();
   initBldc();
-  delay(100);
   bldcPower();
+  delay(1000);
 }
 
 void loop() {
@@ -85,17 +83,23 @@ void loop() {
   getDistance();
   // Braking
   // brake is set to neutral as default
-  (ultraDistance < 32 && vehicle.power == 0) ? servoBrake.write(vehicle.brakePower) :
+  (ultraDistance < 35 && vehicle.power == 0) ? servoBrake.write(vehicle.brakePower) : 
     servoBrake.write(vehicle.brakeNeutral);
-  // power and direction
-  vehicle.power = (checkIRstates()) ? 16 : 0;
-  if(ultraDistance < 32 ) {vehicle.power = 0;}
+
+  if (ultraDistance > 100)
+  {
+    vehicle.power = (checkIRstates()) ? 16 : 0;
+  }
+  else
+  {
+    vehicle.power = (checkIRstates()) ? 13 : 0;
+  }
+  if(ultraDistance < 35 ) {vehicle.power = 0;}
   if(power != vehicle.power) {bldcPower();}
 }
 
 void initBldc() {
-  ESC.attach(9,1000,2000);
-  // set motor power to 0%
+  ESC.attach(8,1000,2000);
   return;
 }
 void bldcPower() {
@@ -138,24 +142,9 @@ bool checkIRstates() {
 
 void getDistance()
 {
-  //get the current distance;
-
-  int values[4] = {0,0,0,0};
-
-  for (int i = 0; i < 4; ++i) 
-  {
-    values[i] = ultrasonic.Ranging(CM);
-  }
-  int maxVal = values[0];
-  for (int i = 0; i < (sizeof(values) / sizeof(values[0])); ++i)
-  {
-    if (values[i] > maxVal) 
-    {
-      maxVal = values[i];
-    }
-  }
-  ultraDistance = maxVal; 
-  return;
+  // get the current distance;
+  ultraDistance = ultrasonic.Ranging(CM);
+  return;  
 }
 
 void initServos() {
