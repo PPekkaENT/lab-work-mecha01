@@ -11,7 +11,7 @@ const int ledPin = 3;
 const int IR_Receiver=5;
 // IR reflective nr.1
 //const int irPin = 4;
-// servo06 = D06
+// servo10 = D10
 // BLDC = D08
 const int pinI1=8;     // motor 1 pin1
 const int pinI2=11;    //motor 1 pin2
@@ -19,7 +19,7 @@ const int speedpinA=9; //EA(PWM)to control the motor_1 speed
 
 // Variables
 // Servo motors
-// Servo servo06;
+Servo servo10;
 // BLDC motor/ESC (Servo object)
 //Servo ESC;
 // array for ir receiver data
@@ -40,8 +40,8 @@ void setup() {
   // initialize BLDC
   //ESC.attach(8,1000,2000);
   // attaches the servo on pin 6 to the servo object (braking) 
-  //servo06.attach(6);
-  //servo06.write(); 
+  servo10.attach(10);
+  servoFunc2();
   pinMode(pinI1,OUTPUT); //set to output
   pinMode(pinI2,OUTPUT);
   pinMode(speedpinA,OUTPUT);
@@ -75,9 +75,17 @@ void loop() {
     {
       goCmd = false;
     }
+    if(dta[8] == 168)
+    {
+      servoFunc();
+    }
+    if(dta[8] == 136)
+    {
+      servoFunc2();
+    }
   }
   //robot.power = (goCmd) ? 12 : 0;
-  (goCmd) ? motorSpeed(225) : motorSpeed(0);
+  (goCmd) ? motorSpeed(255) : motorSpeed(0);
   //if(power != robot.power) {bldcPower();}  
 }
 
@@ -92,11 +100,11 @@ void loop() {
 
 void hallInterrupt() {
   digitalWrite(ledPin,HIGH);
-  attachInterrupt(digitalPinToInterrupt(hallPin), func1, RISING);
+  attachInterrupt(digitalPinToInterrupt(hallPin), ledFunc, RISING);
   return;
 }
 
-void func1() {
+void ledFunc() {
   digitalWrite(ledPin,LOW);
   return;
 }
@@ -107,6 +115,14 @@ void motorSpeed(int val)
   digitalWrite(pinI1,HIGH);
   digitalWrite(pinI2,LOW);
   return;
+}
+
+void servoFunc() {
+  servo10.write(120);
+}
+
+void servoFunc2() {
+  servo10.write(10);
 }
 /*bool checkIRstates() {
   // line detected
