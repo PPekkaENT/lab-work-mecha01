@@ -22,6 +22,8 @@ unsigned char dta[20];
 bool goCmd = false; 
 // IR reflective sensor states
 int irState = 0;
+int irDetection = false;
+
 bool detected = false;
 
 void setup() {
@@ -34,7 +36,6 @@ void setup() {
   IR.Init(IR_Receiver);
   Serial.begin(9600);
   Serial.println("init over");
-  
   // delay
   delay(1000);
   // hall sensor
@@ -63,9 +64,19 @@ void loop() {
     delay(250);
     motorSpeed(0);
     detected = false;
+    irDetection = true;
     delay(3000);
     digitalWrite(ledPin,LOW);
     motorSpeed(255);  
+  }
+  if(irDetection)
+  {
+    irState = digitalRead(irPin);
+    if(irState)
+    {
+      goCmd = false;
+    }
+
   }
   (goCmd) ? motorSpeed(255) : motorSpeed(0);
 }
@@ -85,11 +96,3 @@ void motorSpeed(int val)
   digitalWrite(pinI2,LOW);
   return;
 }
-
-/*bool checkIRstates() {
-  // line detected
-  bool lined = false;
-  ir1State = digitalRead(irPin);
-  lined = (ir1State || ir2State) ? false : true;
-  return lined;
-}*/
