@@ -21,10 +21,11 @@ unsigned char dta[20];
 // go command
 bool goCmd = false; 
 // IR reflective sensor states
-int irState = 0;
+int irState = 1;
 int irDetection = false;
 
 bool detected = false;
+int speed = 200;
 
 void setup() {
   pinMode(pinI1,OUTPUT); //set to output
@@ -59,26 +60,29 @@ void loop() {
       goCmd = false;
     }
   }
-  if (detected == true)
+  if (detected)
   {
     delay(250);
     motorSpeed(0);
     detected = false;
     irDetection = true;
+    speed = 255;
     delay(3000);
     digitalWrite(ledPin,LOW);
-    motorSpeed(255);  
+    motorSpeed(speed);  
   }
   if(irDetection)
   {
     irState = digitalRead(irPin);
     if(irState)
     {
+      irDetection = false;
+      delay(200);
       goCmd = false;
     }
 
   }
-  (goCmd) ? motorSpeed(255) : motorSpeed(0);
+  (goCmd) ? motorSpeed(speed) : motorSpeed(0);
 }
 
 void hallInterrupt() {
