@@ -25,7 +25,7 @@ int irState = 1;
 int irDetection = false;
 
 bool detected = false;
-int speed = 200;
+int speed = 175;
 
 void setup() {
   pinMode(pinI1,OUTPUT); //set to output
@@ -70,6 +70,7 @@ void loop() {
     delay(3000);
     digitalWrite(ledPin,LOW);
     motorSpeed(speed);  
+    delay(15000);
   }
   if(irDetection)
   {
