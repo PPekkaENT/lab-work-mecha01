@@ -1,13 +1,14 @@
 # Laboratory Work in Mechatronics
 -----
 - Project folder for the source code of two Arduino projects.<br>
-- Hardware: Arduino uno + Crowtail deluxe kit
+- Main hardware/components: Arduino Uno + Crowtail-Deluxe kit for Arduino
 -----
 ### Project folder structure
 ```
 .
 ├── build-example
-│   └── Land_Vehicle.ino.cpp --> how the compiler merges the tabs
+│   ├── Land_Vehicle.ino.cpp
+│   └── Pipe_Robot.ino.cpp
 ├── .editorconfig
 ├── .git
 ├── .gitattributes
@@ -15,22 +16,22 @@
 ├── Land_Vehicle
 │   ├── BLDC_module.ino
 │   ├── IR_Reflective_module.ino
-│   ├── Land_Vehicle.ino --> main program (linefollower with a goal)
+│   ├── Land_Vehicle.ino
 │   ├── servo_modules.ino
 │   └── Ultrasonic_module.ino
 ├── libraries
+│   ├── IRSendRev
 │   ├── Servo
 │   └── Ultrasonic
 ├── Pipe_Robot
-│   └── Pipe_Robot.ino --> main program
+│   └── Pipe_Robot.ino
 ├── README.md
-├── test --> module testing
 
 ```
-- (Project 1) Land_Vehicle/: main sketch + tabs
-- (Project 2) Pipe_Robot/: main sketch + tabs
+- Project 1: Land_Vehicle
+- Project 2: Pipe_Robot
 - libraries/: used libraries
-- test/: sketches for module testing 
+- build-example/: cpp-files after compiler has merged the tabs
 -----
 ### How to run
 - Clone repository:
@@ -41,7 +42,7 @@ OR
 ```
 git clone https://github.com/PPekkaENT/lab-work-mecha01.git
 ```
-- Select editor
+- Select editor (Arduino IDE or Visual Studio Code)
 - Check settings: COM port, board type
 - Verify, compile and upload to Arduino uno
 -----
