@@ -1,9 +1,9 @@
 void initServos() {
-  // attaches the servo on pin 6 to the servo object 
+  // attach the servo object on pin 6 
   servoBrake.attach(6);  
   // 55 degrees = neutral position
   servoBrake.write(vehicle.brakeNeutral);
-  // attaches the servo on pin 10 to the servo object 
+  // attach the servo object on pin 10
   servoTurn.attach(10); 
   // 70 degrees = neutral position  
   servoTurn.write(vehicle.neutral);

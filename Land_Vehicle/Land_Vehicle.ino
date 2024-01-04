@@ -1,30 +1,27 @@
-// Include library files
+// Include libraries
 #include <Servo.h>
 #include <Math.h>
 #include <Ultrasonic.h>
 
-// Analog pins
-
 // Digital pins: [2-8,10]
-// Left IR reflective
+// Ultrasonic sensor 
+Ultrasonic ultrasonic(2,3);
+// Left IR sensor
 const int irPin1 = 4;
-// Center IR reflective
+// Center IR sensor
 const int irPin2 = 5;
-// Right IR reflective
+// Right IR sensor
 const int irPin3 = 7;
+// BLDC = D08
 // servoBrake = D06
 // servoTurn = D10
-// ultrasonic = D02&D03
-// BLDC = D08
 
 // Variables
 // Servo motors
 Servo servoBrake;
 Servo servoTurn;
-// BLDC motor/ESC (Servo object)
+// Servo object ESC
 Servo ESC;
-// Ultrasonic object 
-Ultrasonic ultrasonic(2,3);
 // IR states
 int ir1State = 0;
 int ir2State = 0;
@@ -32,7 +29,7 @@ int ir3State = 0;
 // ultrasonic distance
 int ultraDistance = 0;
 // A robot object to control the movement of the vehicle
-// default values Robot vehicle{};
+// default Robot vehicle{};
 struct Robot{
   int power;
   int brakeNeutral;
@@ -44,7 +41,6 @@ struct Robot{
 Robot vehicle = {16, 55, 80, 70, 60, 80};
 
 // Define protypes
-
 // #servo_modules.ino
 // Initialize the servos
 void initServos();
@@ -64,7 +60,7 @@ void bldcPower();
 bool checkIRstates();
 
 // #ultrasonic_module.ino
-// get ultrasonic sensors distance 
+// get the ultrasonic sensors distance 
 void getDistance();
 
 void setup() {
@@ -78,7 +74,7 @@ void loop() {
   int power = vehicle.power;
   getDistance();
   // Braking
-  // brake is set to neutral as default
+  // the brake is in neutral by default
   (ultraDistance < 35 && vehicle.power == 0) ? servoBrake.write(vehicle.brakePower) : 
     servoBrake.write(vehicle.brakeNeutral);
 

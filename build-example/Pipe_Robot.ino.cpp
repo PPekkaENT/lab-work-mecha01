@@ -32,6 +32,11 @@ bool detected = false;
 // default motor speed
 int speed = 175;
 
+void setup();
+void loop();
+void hallInterrupt();
+void motorSpeed(int val);
+
 void setup() {
   pinMode(pinI1,OUTPUT);
   pinMode(pinI2,OUTPUT);
