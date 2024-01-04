@@ -51,6 +51,7 @@ git clone https://github.com/PPekkaENT/lab-work-mecha01.git
 
 -------------
 #### Project 2 - Pipe_Robot
-<h5>The Pipe_Robot is a robot that is completely built to travel along a specific aluminum pipe with a diameter of 25 mm. The robot uses 2 DC motors as a power source. </h5>
+<h5>The Pipe_Robot is a robot that is completely built to travel along a specific aluminum pipe with a diameter of 25 mm. The mechanical structure of the robot is built from LEGO parts. The robot uses wheels placed at a certain angle around the pipe to move forward. The mass of the robot is located heavily under the pipe and the structure is balanced with additional weight at the rear end of the robot. The robot has a remote control that operates at a frequency of 38 kHz and it can be used to control the on-off state.
+The robot uses two DC motors as a power source and does not have an additional braking system. It has a hall sensor that detects changes in magnetic force. The hall sensor is used to detect the magnet that is located near the pipe. The magnet detection event is used as a trigger in the design to meet the requirements of the assignment. An IR sensor is used to detect the black line that marks the end condition. The robot has to be rebooted to complete the track from start to finish consecutively. As the robot is built strictly for a specific task, it has no value outside of the project.</h5>
 
 -----
